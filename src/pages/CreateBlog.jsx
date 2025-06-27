@@ -1,5 +1,6 @@
 import { useState } from "react";
 import BackButton from "../components/BackButton";
+import { BACKEND_URI } from "../../api";
 const CreateBlog = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -7,7 +8,7 @@ const CreateBlog = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("https://backend-blog-website-urwk.onrender.com/blog", {
+      const res = await fetch(`${BACKEND_URI}/blog`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

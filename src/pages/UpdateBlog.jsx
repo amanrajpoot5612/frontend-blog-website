@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from "react";
 import BackButton from "../components/BackButton";
+import { BACKEND_URI } from '../../api';
 
 const UpdateBlog = () => {
  const [title, setTitle] = useState("");
@@ -9,7 +10,7 @@ const UpdateBlog = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("http://localhost:4000/api/blog/update/:id", {
+      const res = await fetch(`${BACKEND_URI}/blog/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

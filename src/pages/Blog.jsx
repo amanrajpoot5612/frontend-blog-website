@@ -3,13 +3,14 @@ import { useEffect, useState } from "react";
 import DeleteBlogButton from "../components/DeleteBlogButton";
 import BackButton from "../components/BackButton";
 import EditBlogButton from "../components/EditBlogButton";
+import { BACKEND_URI } from "../../api";
 const Blog = () => {
   const { id } = useParams();
   const [blog, setBlog] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`https://backend-blog-website-urwk.onrender.com/${id}`)
+    fetch(`${BACKEND_URI}/blog/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setBlog(data);

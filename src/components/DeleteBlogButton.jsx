@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { BACKEND_URI } from "../../api";
 
 const DeleteBlogButton = ({blogId}) => {
   const navigate = useNavigate();
@@ -8,7 +9,7 @@ const DeleteBlogButton = ({blogId}) => {
     if (!confirmDelete) return;
 
     try {
-      const res = await fetch(`https://backend-blog-website-urwk.onrender.com/blog/${blogId}`, {
+      const res = await fetch(`${BACKEND_URI}/blog/${blogId}`, {
         method: "DELETE",
       });
 

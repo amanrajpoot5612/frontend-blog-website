@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
+import { BACKEND_URI } from '../../api';
 
 const Home = () => {
     const [Blogs, setBlogs] = useState([])
 
     useEffect(() => {
-        fetch('https://backend-blog-website-urwk.onrender.com')
+        fetch(`${BACKEND_URI}/blog`)
         .then(res => res.json())
         .then(data => setBlogs(data))
         .catch(err => console.log(`${err}`)
