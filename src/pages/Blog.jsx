@@ -2,14 +2,14 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import DeleteBlogButton from "../components/DeleteBlogButton";
 import BackButton from "../components/BackButton";
-
+import EditBlogButton from "../components/EditBlogButton";
 const Blog = () => {
   const { id } = useParams();
   const [blog, setBlog] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`http://localhost:4000/api/blog/${id}`)
+    fetch(`https://backend-blog-website-urwk.onrender.com/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setBlog(data);
@@ -39,6 +39,7 @@ const Blog = () => {
           Posted on {new Date(blog.createdAt).toLocaleString()}
         </p>
       </div>
+      <EditBlogButton id= {id}></EditBlogButton>
       <DeleteBlogButton blogId={id}></DeleteBlogButton>
     </div>
     </>
