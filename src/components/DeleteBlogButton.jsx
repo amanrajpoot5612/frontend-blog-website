@@ -8,7 +8,7 @@ const DeleteBlogButton = ({blogId}) => {
     if (!confirmDelete) return;
 
     try {
-      const res = await fetch(`http://localhost:4000/api/blog/${blogId}`, {
+      const res = await fetch(`https://backend-blog-website-urwk.onrender.com/blog/${blogId}`, {
         method: "DELETE",
       });
 

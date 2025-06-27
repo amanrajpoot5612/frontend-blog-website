@@ -5,7 +5,7 @@ const Home = () => {
     const [Blogs, setBlogs] = useState([])
 
     useEffect(() => {
-        fetch('http://localhost:4000/api/blog')
+        fetch('https://backend-blog-website-urwk.onrender.com')
         .then(res => res.json())
         .then(data => setBlogs(data))
         .catch(err => console.log(`${err}`)

@@ -1,14 +1,16 @@
+import React from 'react'
 import { useState } from "react";
 import BackButton from "../components/BackButton";
-const CreateBlog = () => {
-  const [title, setTitle] = useState("");
+
+const UpdateBlog = () => {
+ const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("https://backend-blog-website-urwk.onrender.com/blog", {
-        method: "POST",
+      const res = await fetch("http://localhost:4000/api/blog/update/:id", {
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
@@ -17,12 +19,12 @@ const CreateBlog = () => {
 
       if (res.ok) {
         const data = await res.json();
-        alert("✅ Blog created!");
-        console.log("Blog created:", data);
+        alert("✅ Blog updated!");
+        console.log("Blog updated:", data);
         setTitle("");
         setContent("");
       } else {
-        alert("❌ Failed to create blog");
+        alert("❌ Failed to update blog");
       }
     } catch (err) {
       console.error(err);
@@ -55,7 +57,7 @@ const CreateBlog = () => {
         type="submit"
         className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700"
       >
-        Post Blog
+        Update Blog
       </button>
     </form>
     </>
@@ -63,4 +65,5 @@ const CreateBlog = () => {
   );
 }
 
-export default CreateBlog
+
+export default UpdateBlog
