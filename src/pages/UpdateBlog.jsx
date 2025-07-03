@@ -1,12 +1,32 @@
-import React from 'react'
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import BackButton from "../components/BackButton";
-import { BACKEND_URI } from '../../api';
+import { BACKEND_URI } from "../../api";
 
 const UpdateBlog = () => {
- const [title, setTitle] = useState("");
+  const { id } = useParams(); // get the blog id from the URL
+  console.log(`id : ${id}`);
+  
+  const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [loading, setLoading] = useState(true);
 
+  // Fetch existing blog content
+  useEffect(() => {
+    fetch(`${BACKEND_URI}/blog/${id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setTitle(data.title);
+        setContent(data.content);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("Failed to load blog for editing:", err);
+        setLoading(false);
+      });
+  }, [id]);
+
+  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -22,49 +42,77 @@ const UpdateBlog = () => {
         const data = await res.json();
         alert("✅ Blog updated!");
         console.log("Blog updated:", data);
-        setTitle("");
-        setContent("");
       } else {
         alert("❌ Failed to update blog");
       }
     } catch (err) {
-      console.error(err);
+      console.error("Error updating blog:", err);
     }
   };
 
+  if (loading)
+    return (
+      <div className="flex justify-center items-center h-screen text-gray-500 text-lg">
+        ⏳ Loading blog for editing...
+      </div>
+    );
+
   return (
-    <>
-      <BackButton></BackButton>
-        <form
-      onSubmit={handleSubmit}
-      className="max-w-xl mx-auto p-6 bg-white shadow-md rounded-xl"
-    >
-      <h2 className="text-2xl font-bold mb-4">Create New Blog</h2>
-      <input
-        className="border w-full mb-3 p-2 rounded"
-        type="text"
-        placeholder="Title"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-      />
-      <textarea
-        className="border w-full mb-3 p-2 rounded"
-        placeholder="Content"
-        rows={6}
-        value={content}
-        onChange={(e) => setContent(e.target.value)}
-      ></textarea>
-      <button
-        type="submit"
-        className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700"
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-zinc-900 dark:to-zinc-800 px-4 py-10">
+      {/* Back button at the top */}
+      <div className="max-w-4xl mx-auto mb-6">
+        <BackButton />
+      </div>
+
+      {/* Update Form */}
+      <form
+        onSubmit={handleSubmit}
+        className="max-w-4xl mx-auto bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 shadow-xl rounded-2xl p-8 transition-all"
       >
-        Update Blog
-      </button>
-    </form>
-    </>
-  
+        <h2 className="text-4xl font-bold text-center text-blue-600 dark:text-blue-400 mb-8">
+          ✏️ Edit Blog Post
+        </h2>
+
+        {/* Title Field */}
+        <div className="mb-6">
+          <label className="block text-sm font-semibold text-gray-700 dark:text-zinc-300 mb-2">
+            Blog Title
+          </label>
+          <input
+            type="text"
+            placeholder="Update blog title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            required
+            className="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-zinc-800 text-gray-900 dark:text-white border border-gray-300 dark:border-zinc-600 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+          />
+        </div>
+
+        {/* Content Field */}
+        <div className="mb-8">
+          <label className="block text-sm font-semibold text-gray-700 dark:text-zinc-300 mb-2">
+            Blog Content
+          </label>
+          <textarea
+            placeholder="Update your blog content..."
+            rows={8}
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+            required
+            className="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-zinc-800 text-gray-900 dark:text-white border border-gray-300 dark:border-zinc-600 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+          ></textarea>
+        </div>
+
+        {/* Submit */}
+        <button
+          type="submit"
+          className="w-full py-3 bg-blue-600 text-white font-semibold text-lg rounded-lg hover:bg-blue-700 transition transform hover:scale-[1.01]"
+        >
+          🔄 Update Blog
+        </button>
+      </form>
+    </div>
   );
-}
+};
 
-
-export default UpdateBlog
+export default UpdateBlog;

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import BackButton from "../components/BackButton";
 import { BACKEND_URI } from "../../api";
+
 const CreateBlog = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -31,37 +32,62 @@ const CreateBlog = () => {
   };
 
   return (
-    <>
-      <BackButton></BackButton>
-        <form
-      onSubmit={handleSubmit}
-      className="max-w-xl mx-auto p-6 bg-white shadow-md rounded-xl"
-    >
-      <h2 className="text-2xl font-bold mb-4">Create New Blog</h2>
-      <input
-        className="border w-full mb-3 p-2 rounded"
-        type="text"
-        placeholder="Title"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-      />
-      <textarea
-        className="border w-full mb-3 p-2 rounded"
-        placeholder="Content"
-        rows={6}
-        value={content}
-        onChange={(e) => setContent(e.target.value)}
-      ></textarea>
-      <button
-        type="submit"
-        className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700"
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-zinc-900 dark:to-zinc-800 px-4 py-10">
+      {/* Back button at top */}
+      {/* Form */}
+      <form
+        onSubmit={handleSubmit}
+        className="max-w-4xl mx-auto bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 shadow-xl rounded-2xl p-8 transition-all"
       >
-        Post Blog
-      </button>
-    </form>
-    </>
-  
-  );
-}
+        <h2 className="text-4xl font-bold text-center text-blue-600 dark:text-blue-400 mb-8">
+          ✍️ Create a New Blog
+        </h2>
 
-export default CreateBlog
+        {/* Title Input */}
+        <div className="mb-6">
+          <label className="block text-sm font-semibold text-gray-700 dark:text-zinc-300 mb-2">
+            Blog Title
+          </label>
+          <input
+            type="text"
+            placeholder="Enter blog title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            required
+            className="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-zinc-800 text-gray-900 dark:text-white border border-gray-300 dark:border-zinc-600 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+          />
+        </div>
+
+        {/* Content Area */}
+        <div className="mb-8">
+          <label className="block text-sm font-semibold text-gray-700 dark:text-zinc-300 mb-2">
+            Blog Content
+          </label>
+          <textarea
+            placeholder="Write your blog content here..."
+            rows={8}
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+            required
+            className="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-zinc-800 text-gray-900 dark:text-white border border-gray-300 dark:border-zinc-600 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+          ></textarea>
+        </div>
+
+        {/* Submit Button */}
+        <button
+          type="submit"
+          className="w-full py-3 bg-blue-600 text-white font-semibold text-lg rounded-lg hover:bg-blue-700 transition transform hover:scale-[1.01]"
+        >
+          🚀 Publish Blog
+        </button>
+              <div className="max-w-4xl mx-auto mb-6">
+        <BackButton />
+      </div>
+
+      </form>
+      
+    </div>
+  );
+};
+
+export default CreateBlog;
