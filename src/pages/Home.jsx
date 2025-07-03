@@ -6,6 +6,7 @@ import { AuthContext } from "../context/AuthContext";
 import Hero from './Hero';
 import ProfileDropdown from '../components/ProfileDropdown';
 import profile_demo from '../assets/profile_.jpeg'
+import DemoBanner from '../components/DemoBanner';
 const Home = () => {
     const [Blogs, setBlogs] = useState([])
     const { user, loading } = useContext(AuthContext);
@@ -40,6 +41,7 @@ const Home = () => {
     <div className="min-h-screen bg-gray-50 dark:bg-zinc-900 text-zinc-800 dark:text-zinc-100">
   {/* TOP BAR */}
   {/* TOP BAR */}
+  <DemoBanner></DemoBanner>
 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between px-6 py-4 border-b border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-800 gap-4">
   {/* Title */}
   <h1 className="text-3xl font-bold text-blue-600 dark:text-blue-400 text-center sm:text-left">
