@@ -1,7 +1,8 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { BACKEND_URI } from "../../api";
+import { AuthContext } from "../context/AuthContext";
 
 
 const Register = () => {
@@ -9,8 +10,11 @@ const Register = () => {
     const [password, setPassword] = useState("");
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
+    const navigate = useNavigate();
+    const { setUser } = useContext(AuthContext);
 
-    const handleLogin = async (e) => {
+
+    const handleRegister = async (e) => {
     e.preventDefault();
     try {
       const res = await fetch(`${BACKEND_URI}/user/register`, {
@@ -18,15 +22,16 @@ const Register = () => {
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({ username, password , email , name})
+        body: JSON.stringify({ username, password , email , name}),
+        credentials: "include",
       });
 
       const data = await res.json();
 
       if (res.ok) {
         alert("✅ Register successful!");
-        // Save token to localStorage or context
-        localStorage.setItem("token", data.token);
+        setUser(data.user)
+        navigate("/");
       } else {
         alert(data.error || "❌ Login failed");
       }
@@ -43,7 +48,7 @@ const Register = () => {
           Create an Account ✨
         </h2>
 
-        <form onSubmit={handleLogin} className="space-y-5">
+        <form onSubmit={handleRegister} className="space-y-5">
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-zinc-300 mb-1">
               Full Name
@@ -100,8 +105,8 @@ const Register = () => {
 
         <p className="text-sm text-center mt-6 text-gray-600 dark:text-zinc-400">
           Already have an account?{" "}
-          <Link to="/signin" className="text-indigo-600 hover:underline">
-            Sign in
+          <Link to="/user/login" className="text-indigo-600 hover:underline">
+            Login
           </Link>
         </p>
       </div>
