@@ -28,13 +28,13 @@ const DemoBanner = () => {
     <div className="bg-yellow-100 dark:bg-yellow-300 text-yellow-900 px-6 py-4 flex flex-col sm:flex-row justify-between items-center border-b border-yellow-300">
       <div className="text-sm sm:text-base font-medium text-center sm:text-left flex flex-col sm:flex-row items-center gap-2">
         <p>
-          <span className="font-semibold">Demo Account <span className="text-red-600">(Use these credentials for faster access)</span>:</span> Email: <span className="font-mono">demo@example.com</span>
+          <span className="font-semibold">Demo Account <span className="text-red-600">(Use these credentials for faster access)</span>:</span> Email: <span className="font-mono">blog.app@gmail.com</span>
         </p>
-        <CopyButton text="demo@example.com" label="Email" />
+        <CopyButton text="blog.app@gmail.com" label="Email" />
         <p>
-          Password: <span className="font-mono">Demo@123</span>
+          Password: <span className="font-mono">aman-blog-app</span>
         </p>
-        <CopyButton text="Demo@123" label="Password" />
+        <CopyButton text="aman-blog-app" label="Password" />
       </div>
       <button
         onClick={() => setVisible(false)}
