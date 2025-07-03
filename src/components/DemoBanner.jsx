@@ -32,9 +32,9 @@ const DemoBanner = () => {
         </p>
         <CopyButton text="blog.app@gmail.com" label="Email" />
         <p>
-          Password: <span className="font-mono">aman-blog-app</span>
+          Password: <span className="font-mono">aman-blog-app123</span>
         </p>
-        <CopyButton text="aman-blog-app" label="Password" />
+        <CopyButton text="aman-blog-app123" label="Password" />
       </div>
       <button
         onClick={() => setVisible(false)}
