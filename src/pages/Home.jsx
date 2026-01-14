@@ -45,7 +45,7 @@ const Home = () => {
 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between px-6 py-4 border-b border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-800 gap-4">
   {/* Title */}
   <h1 className="text-3xl font-bold text-blue-600 dark:text-blue-400 text-center sm:text-left">
-    📝 BloggUpp
+    📝 Blog
   </h1>
 
   {/* Right Side: Profile + Create */}
